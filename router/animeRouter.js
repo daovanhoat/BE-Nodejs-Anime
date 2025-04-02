@@ -3,7 +3,7 @@ const express = require("express");
 const animeRouter = express.Router();
 
 //Su dung controller
-const { createAnime, getAllAnime, getAnimeById, updateAnime, deleteAnime, searchAnime } = require("../controller/animeController");
+const { createAnime, getAllAnime, getAnimeById, updateAnime, deleteAnime, searchAnime, increaseAnimeView } = require("../controller/animeController");
 
 //Create Anime
 animeRouter.post('/anime/create', createAnime);
@@ -17,5 +17,7 @@ animeRouter.put('/anime/:id', updateAnime);
 animeRouter.delete('/anime/:id', deleteAnime);
 //Tim kiem theo tieu de
 animeRouter.post('/anime/search', searchAnime);
+//Tăng số lượt xem
+animeRouter.post('/anime/:animeId/increaseView', increaseAnimeView);
 
 module.exports = animeRouter;

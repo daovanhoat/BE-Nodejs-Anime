@@ -22,6 +22,10 @@ const animeSchema = new mongoose.Schema({
     videoUrl: {
         type: String
     },
+    views: { 
+        type: Number, 
+        default: 0 
+    },
     created: {
         type: Date,
         default: Date.now

@@ -247,5 +247,45 @@ const searchAnime = async (req, res) => {
         });
     }
 }
+//Hàm tăng số lượt xem
+const increaseAnimeView = async (req, res) => {
+    try {
+        let animeId = req.params.animeId;
 
-module.exports = { createAnime, getAllAnime, getAnimeById, updateAnime, deleteAnime, searchAnime };
+        if (!mongoose.Types.ObjectId.isValid(animeId)) {
+            return res.status(400).json({
+                status: "Error 400: Bad Request",
+                message: "Invalid anime ID"
+            });
+        }
+
+        // Tăng số lượt xem của anime
+        const updatedAnime = await Anime.findByIdAndUpdate(
+            animeId,
+            { $inc: { views: 1 } },
+            { new: true }
+        );
+
+        if (!updatedAnime) {
+            return res.status(404).json({
+                status: "Error 404: Not Found",
+                message: "Anime not found"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            message: "View count increased",
+            data: updatedAnime
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            status: "Error 500: Internal Server Error",
+            message: error.message
+        });
+    }
+};
+
+
+module.exports = { createAnime, getAllAnime, getAnimeById, updateAnime, deleteAnime, searchAnime, increaseAnimeView };

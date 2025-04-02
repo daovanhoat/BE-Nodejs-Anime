@@ -18,10 +18,6 @@ const episodesSchema = new mongoose.Schema({
         type: Number, // Đơn vị phút hoặc giây
         default: 0
     },
-    views: {
-        type: Number,
-        default: 0
-    },
     status: {
         type: String,
         enum: ["ongoing", "completed", "delayed"],

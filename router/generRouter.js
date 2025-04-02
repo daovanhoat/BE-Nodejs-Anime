@@ -20,7 +20,7 @@ generRouter.get('/gener/:id', getGenreById);
 //Cap nhat mot anime
 generRouter.put('/gener/:id', updateGenre);
 //Xoa mot anime
-generRouter.delete('/anime/:id', deleteGenre);
+generRouter.delete('/gener/:id', deleteGenre);
 
 
 module.exports = generRouter;
