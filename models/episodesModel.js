@@ -14,6 +14,19 @@ const episodesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    duration: {
+        type: Number, // Đơn vị phút hoặc giây
+        default: 0
+    },
+    views: {
+        type: Number,
+        default: 0
+    },
+    status: {
+        type: String,
+        enum: ["ongoing", "completed", "delayed"],
+        default: "ongoing"
+    },
     create: {
         type: Date,
         default: Date.now

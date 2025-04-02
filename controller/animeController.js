@@ -56,7 +56,14 @@ const createAnime = async (req, res) => {
 const getAllAnime = async (req, res) => {
     //B1 gui yeu cau lay danh sach tu DB
     try {
-        let animeList = await Anime.find({})
+        let page = parseInt(req.query.page) || 1;
+        let limit = parseInt(req.query.limit) || 10;
+        let skip = (page - 1) * limit;
+
+        let animeList = await Anime.find({}).skip(skip).limit(limit);
+
+        // đếm tổng số anime trong db 
+        let totalAnime = await Anime.countDocuments();
 
         //B2 kiem tra du lieu rong
         if(animeList.length === 0) {
@@ -68,9 +75,14 @@ const getAllAnime = async (req, res) => {
 
         //B3 Tra ve danh sach anime
         return res.status(200).json({
-            status:"Sucesss",
+            status:"Success",
             message:"Retrieved anime list successfully",
-            data: animeList
+            data: animeList,
+            pagination: {
+                currentPage: page,
+                totalPages: Math.ceil(totalAnime / limit),
+                totalRecords: totalAnime
+            }
         });
 
     } catch(error) {
@@ -78,7 +90,7 @@ const getAllAnime = async (req, res) => {
             status: "Error 500: Internal Server Error",
             message: error.message
         })
-    }n
+    }
 }
 
 //Lay chi tiet anime theo id
