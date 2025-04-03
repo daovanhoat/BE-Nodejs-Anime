@@ -10,6 +10,7 @@ const animeRouter = require("./router/animeRouter")
 const animeGenerRouter = require("./router/animeGenerRouter")
 const generRouter = require("./router/generRouter")
 const episodeRouter = require("./router/episodeRouter")
+const watchHistoryRouter = require("./router/watchHistoryRouter")
 
 
 app.use(express.json())
@@ -22,6 +23,7 @@ app.use('/', animeRouter);
 app.use('/', animeGenerRouter);
 app.use('/', generRouter);
 app.use('/', episodeRouter);
+app.use('/', watchHistoryRouter);
 
 app.listen(8000, () => {
     console.log("Server run at port 8000");

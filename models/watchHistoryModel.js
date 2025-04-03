@@ -8,12 +8,21 @@ const watchHistorySchema = new mongoose.Schema({
     },
     episodeId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Episode",
+        ref: "Episodes",
         required: true
     },
-    watched: {
+    animeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Anime",
+        required: true
+    },
+    watchedAt: {
         type: Date,
         default: Date.now
+    },
+    progress: {
+        type: Number, // Tiến độ xem (tính theo giây hoặc phần trăm)
+        default: 0
     }
 });
 
